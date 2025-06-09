@@ -1,0 +1,5 @@
+
+.ant-menu-horizontal > .ant-menu-item,
+.ant-menu-horizontal > .ant-menu-item svg {
+    transition: color .25s ease;
+}
