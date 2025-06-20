@@ -1,22 +1,25 @@
-
 import React from 'react';
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
+import LayoutGrid from './LayoutGrid.jsx';
 
 const { Content } = Layout;
 
-const contentStyle = {
-    textAlign: 'center',
-    minHeight: 120,
-    lineHeight: '120px',
-    color: '#fff',
-    backgroundColor: '#0958d9',
-};
-
 const ContentComponent = () => (
-    <Content style={contentStyle}>
-        <Outlet />
-    </Content>
+    <Layout style={{ minHeight: '100vh' }}>
+        <Content
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flex: 1,
+                color: '#fff',
+                background: '#0958d9'
+            }}
+        >
+            <LayoutGrid />
+            <Outlet />
+        </Content>
+    </Layout>
 );
 
 export default ContentComponent;

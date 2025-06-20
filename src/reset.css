@@ -7,4 +7,10 @@ html, body {
 }
 #root{
     height: 100%;
+    overflow: auto;
+}
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
 }

@@ -4,7 +4,9 @@ import SubmitButton from "./SubmitButton.jsx";
 import {useSelector, useDispatch} from "react-redux";
 import {addTask} from "../../../Redux/slices/tasksSlice.js";
 import CategoriesModal from "./modal/CategoriesModal.jsx";
+import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
+
 
 const formItemLayout = {
     labelCol: {
@@ -35,12 +37,17 @@ const FormComponent = () => {
         setIsModalOpen(false);
     }
     const handleSubmit = values => {
+
+        const dateRange = values.date
+            ? values.date.map(d => d.format('YYYY-MM-DD HH:mm'))
+            : null;
+
         const task = {
             id:Date.now(),
             title: values.title,
             description: values.description,
             categories: [...values.category],
-            date: values.date ? values.date : null,
+            date: dateRange,
         }
         console.log(task);
         form.resetFields();
