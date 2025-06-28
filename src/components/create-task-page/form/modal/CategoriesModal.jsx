@@ -15,7 +15,7 @@ const tabItems = [
     },
 ];
 const onChangeTab = key => {
-    console.log(key);
+
 };
 const CategoriesModal = ({isModalOpen, handleOk, handleCancel}) => {
     return (
