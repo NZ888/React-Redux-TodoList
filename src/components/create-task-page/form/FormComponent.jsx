@@ -4,7 +4,6 @@ import SubmitButton from "./SubmitButton.jsx";
 import {useSelector, useDispatch} from "react-redux";
 import {addTask} from "../../../Redux/slices/tasksSlice.js";
 import CategoriesModal from "./modal/CategoriesModal.jsx";
-import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 
 
