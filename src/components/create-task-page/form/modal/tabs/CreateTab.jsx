@@ -1,26 +1,50 @@
 import React from 'react';
-import {Button, Col, Form, Input, Row} from "antd";
+import { Col, Form, Input, message, Row} from "antd";
 import SubmitButton from "../../SubmitButton.jsx";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addCategory} from "../../../../../Redux/slices/categorySlice.js";
 
 const CreateTab = () => {
 
     const dispatch = useDispatch();
+    const categories = useSelector((state) => state.category.category);
+    const [messageApi, contextHolder] = message.useMessage();
+    const [form] = Form.useForm();
 
     const handleSubmit = values => {
 
-        const category = {
-            label: values.NameOfCategory,
-            value: values.NameOfCategory
+        const isDuplicate = categories.some(
+            cat => cat.value.trim().toLowerCase() === values.NameOfCategory.trim().toLowerCase()
+        );
+
+        if (isDuplicate) {
+            messageApi.open({
+                type: 'error',
+                content: `Category "${values.NameOfCategory}" already exists`,
+            });
+
         }
-        dispatch(addCategory(category))
-        form.resetFields();
+        else if(values.NameOfCategory === "Unsorted Tasks" || values.NameOfCategory === "UnsortedTasks"){
+            messageApi.warning('This category cannot be created')
+        }
+        else if(!isDuplicate) {
+            const category = {
+                label: values.NameOfCategory,
+                value: values.NameOfCategory
+            }
+            dispatch(addCategory(category))
+            form.resetFields();
+            messageApi.open({
+                type: 'success',
+                content: `Created new task - "${category.label}"`,
+            });
+        }
     };
-    const [form] = Form.useForm();
+
     return (
 
         <>
+            {contextHolder}
             <Form
                 name="basic"
                 labelCol={{ span: 5}}

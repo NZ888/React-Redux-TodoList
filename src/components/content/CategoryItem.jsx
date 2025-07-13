@@ -3,7 +3,7 @@ import {Button, Divider} from "antd";
 import {useDispatch} from "react-redux";
 import {deleteTask} from "../../Redux/slices/tasksSlice.js";
 import EditTaskModal from "./modal/EditTaskModal.jsx";
-const CategoryItem = ({id, title, description, date = null}) => {
+const CategoryItem = ({id, title, description, date = null, categories}) => {
 
     const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const CategoryItem = ({id, title, description, date = null}) => {
 
     return (
         <>
-            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date]}/>
+            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories]}/>
             <div data-id-task={id}>
                 <h2>Title: {title}</h2>
                 <p>Description: {description}</p>

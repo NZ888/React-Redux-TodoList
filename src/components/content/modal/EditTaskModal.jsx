@@ -1,21 +1,26 @@
 import React from 'react';
 import { Modal} from "antd";
+import FormComponent from "../../create-task-page/form/FormComponent.jsx";
 
-const EditTaskModal = ({isModalOpen, handleOk, handleCancel, taskInfo = []}) => {
-    const [taskId, taskTitle, taskDescription, taskDate] = taskInfo;
+const EditTaskModal = ({isModalOpen, handleCancel, taskInfo = []}) => {
+    const [taskId, taskTitle, taskDescription, taskDate, categories] = taskInfo;
+    const task = {
+        id:taskId,
+        title: taskTitle,
+        description: taskDescription,
+        categories: categories,
+        date: taskDate,
+    }
     return (
         <>
             <Modal
                 title={`Edit ${taskId} Task Modal`}
                 closable={{ 'aria-label': 'Custom Close Button' }}
                 open={isModalOpen}
-                onOk={handleOk}
                 onCancel={handleCancel}
+                footer={null}
             >
-                <p>task id - {taskId}</p>
-                <p>title - {taskTitle}</p>
-                <p>description - {taskDescription}</p>
-                <p>{taskDate}</p>
+                <FormComponent existableTaskInfo={task}/>
             </Modal>
         </>
     );

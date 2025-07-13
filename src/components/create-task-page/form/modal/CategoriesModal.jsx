@@ -25,6 +25,7 @@ const CategoriesModal = ({isModalOpen, handleOk, handleCancel}) => {
             open={isModalOpen}
             onOk={handleOk}
             onCancel={handleCancel}
+            footer={null}
         >
             <Tabs defaultActiveKey="1" items={tabItems} onChange={onChangeTab} />
         </Modal>

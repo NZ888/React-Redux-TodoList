@@ -24,6 +24,7 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
                             id={t.id}
                             date={t.date}
                             description={t.description}
+                            categories={t.categories}
                         />
                     ))
                 ) : (

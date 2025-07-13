@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {Button, Col, DatePicker, Form, Input, Modal, Row, Select, Space, Tabs} from 'antd';
+import React, {useEffect, useState} from 'react';
+import {Button, Col, DatePicker, Form, Input, Row, Select, Space} from 'antd';
 import SubmitButton from "./SubmitButton.jsx";
 import {useSelector, useDispatch} from "react-redux";
-import {addTask} from "../../../Redux/slices/tasksSlice.js";
+import {addTask, editTask} from "../../../Redux/slices/tasksSlice.js";
 import CategoriesModal from "./modal/CategoriesModal.jsx";
 const { RangePicker } = DatePicker;
-
+import dayjs from 'dayjs';
 
 const formItemLayout = {
     labelCol: {
@@ -18,13 +18,30 @@ const formItemLayout = {
     },
 };
 
-const FormComponent = () => {
+const FormComponent = ({existableTaskInfo = null}) => {
+    const [isEditMode, setIsEditMode] = useState(() => existableTaskInfo !== null);
     const [form] = Form.useForm();
     const variant = Form.useWatch('variant', form);
     const categories = useSelector(state => state.category.category);
     const dispatch = useDispatch();
-
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+    useEffect(() => {
+        setIsEditMode(existableTaskInfo !== null);
+        if (existableTaskInfo) {
+            const { title, description, categories, date } = existableTaskInfo;
+            form.setFieldsValue({
+                title,
+                description,
+                category: categories,
+                date: date ? [dayjs(date[0]), dayjs(date[1])] : undefined,
+            });
+        } else {
+            form.resetFields();
+        }
+    }, [existableTaskInfo, form])
+
     const showModal = () => {
         setIsModalOpen(true);
     };
@@ -42,20 +59,26 @@ const FormComponent = () => {
             : null;
 
         const task = {
-            id:Date.now(),
+            id: isEditMode ? existableTaskInfo.id : Date.now(),
             title: values.title,
             description: values.description,
             categories: [...values.category],
             date: dateRange,
         }
-        console.log(task);
+
+        if (isEditMode) {
+            dispatch(editTask(task));
+        }
+        else {
+            dispatch(addTask(task))
+        }
         form.resetFields();
-        dispatch(addTask(task))
+
     };
     return (
         <>
             <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
-            <h1>Lets make the task!</h1>
+            <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
             <Form {...formItemLayout} form={form} variant={variant || 'outlined'} initialValues={{ variant: 'outlined' }} onFinish={handleSubmit}>
 
                 <Form.Item label="Title" name="title" rules={[{ required: true, message: 'Please input!' }]}>
@@ -103,7 +126,9 @@ const FormComponent = () => {
 
                 <Form.Item name="submit" label="The end of the form">
                     <Space>
-                        <SubmitButton form={form}>Submit</SubmitButton>
+                        <SubmitButton form={form}>
+                            {isEditMode ? 'Save' : 'Submit'}
+                        </SubmitButton>
                         <Button htmlType="reset">Reset</Button>
                     </Space>
                 </Form.Item>
