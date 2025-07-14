@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Button, Col, DatePicker, Form, Input, Row, Select, Space} from 'antd';
+import {Button, Col, DatePicker, Form, Input, message, Row, Select, Space} from 'antd';
 import SubmitButton from "./SubmitButton.jsx";
 import {useSelector, useDispatch} from "react-redux";
 import {addTask, editTask} from "../../../Redux/slices/tasksSlice.js";
@@ -25,7 +25,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
     const categories = useSelector(state => state.category.category);
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [messageApi, contextHolder] = message.useMessage();
 
     useEffect(() => {
         setIsEditMode(existableTaskInfo !== null);
@@ -73,10 +73,14 @@ const FormComponent = ({existableTaskInfo = null}) => {
             dispatch(addTask(task))
         }
         form.resetFields();
-
+        messageApi.open({
+            type: 'success',
+            content: isEditMode ? `Successful edited task ${existableTaskInfo.id}` : `Created new task` ,
+        });
     };
     return (
         <>
+            {contextHolder}
             <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
             <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
             <Form {...formItemLayout} form={form} variant={variant || 'outlined'} initialValues={{ variant: 'outlined' }} onFinish={handleSubmit}>

@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
+import {deleteCategory} from "./categorySlice.js";
 
 const initialState = {
     tasks: []
@@ -24,6 +25,16 @@ export const createTaskSlice = createSlice({
             task.categories = categories
             task.date = date
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(deleteCategory, (state, action) => {
+            state.tasks.forEach(task => {
+                task.categories = task.categories.filter(c => c !== action.payload);
+                if (task.categories.length === 0) {
+                    task.categories.push('UnsortedTasks');
+                }
+            });
+        });
     }
 })
 

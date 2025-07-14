@@ -3,7 +3,7 @@ import {Button, Divider} from "antd";
 import {useDispatch} from "react-redux";
 import {deleteTask} from "../../Redux/slices/tasksSlice.js";
 import EditTaskModal from "./modal/EditTaskModal.jsx";
-const CategoryItem = ({id, title, description, date = null, categories}) => {
+const CategoryItem = ({id, title, description, date = null, categories, messageAPI}) => {
 
     const dispatch = useDispatch();
 
@@ -11,6 +11,8 @@ const CategoryItem = ({id, title, description, date = null, categories}) => {
 
     const onClickDelete = (value) => {
         console.log(value)
+        messageAPI
+            .open({ type: 'success', content: `Deleted ${id}`})
         dispatch(deleteTask(id))
     }
 

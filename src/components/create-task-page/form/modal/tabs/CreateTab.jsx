@@ -36,7 +36,7 @@ const CreateTab = () => {
             form.resetFields();
             messageApi.open({
                 type: 'success',
-                content: `Created new task - "${category.label}"`,
+                content: `Created new category - "${category.label}"`,
             });
         }
     };

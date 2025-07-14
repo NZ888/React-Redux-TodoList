@@ -1,9 +1,10 @@
 import React from 'react';
-import {Card} from "antd";
+import {Card, message} from "antd";
 import CategoryItem from "./CategoryItem.jsx";
 
 const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
 
+    const [messageApi, contextHolder] = message.useMessage();
 
     const cardStyle = {
         width: "auto",
@@ -15,6 +16,7 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
     };
     return (
         <>
+            {contextHolder}
             <Card title={category} variant="borderless" style={cardStyle} data-value={categoryValue}>
                 {Array.isArray(todos) && todos.length > 0 ? (
                     todos.map((t) => (
@@ -25,10 +27,11 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
                             date={t.date}
                             description={t.description}
                             categories={t.categories}
+                            messageAPI={messageApi}
                         />
                     ))
                 ) : (
-                    <p style={{ color: '#999' }}>Пусто</p>
+                    <p style={{ color: '#999' }}>Empty</p>
                 )}
             </Card>
         </>
