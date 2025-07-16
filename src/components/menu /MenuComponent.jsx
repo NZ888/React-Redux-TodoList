@@ -30,7 +30,7 @@ const menuItems = rawItems.map((it) => ({
     label: (
         <NavLink
             to={it.path}
-            style={({ isActive }) => ({
+            style={( ) => ({
                 color: 'inherit',
                 textDecoration: 'none',
 

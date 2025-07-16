@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {Button, Divider} from "antd";
 import {useDispatch} from "react-redux";
 import {deleteTask} from "../../Redux/slices/tasksSlice.js";
@@ -9,24 +9,23 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const onClickDelete = (value) => {
-        console.log(value)
+    const onClickDelete = useCallback(() => {
         messageAPI
             .open({ type: 'success', content: `Deleted ${id}`})
         dispatch(deleteTask(id))
-    }
+    }, [dispatch, id, messageAPI])
 
-    const onClickEdit = () => {
+    const onClickEdit = useCallback(() => {
         setIsModalOpen(true);
-    }
+    }, [])
 
-    const handleOk = () => {
+    const handleOk = useCallback(() => {
         setIsModalOpen(false);
-    };
+    }, [])
 
-    const handleCancel = () => {
+    const handleCancel = useCallback(() => {
         setIsModalOpen(false);
-    };
+    }, []);
 
     return (
         <>
@@ -43,4 +42,4 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
     );
 };
 
-export default CategoryItem;
+export default React.memo(CategoryItem);

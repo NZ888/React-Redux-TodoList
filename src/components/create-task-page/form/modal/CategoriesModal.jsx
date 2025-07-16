@@ -14,7 +14,7 @@ const tabItems = [
         children: <DeleteTab/>,
     },
 ];
-const onChangeTab = key => {
+const onChangeTab = () => {
 
 };
 const CategoriesModal = ({isModalOpen, handleOk, handleCancel}) => {

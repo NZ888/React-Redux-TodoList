@@ -39,4 +39,4 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
 
 };
 
-export default ContentCategoryComponent;
+export default React.memo(ContentCategoryComponent);
