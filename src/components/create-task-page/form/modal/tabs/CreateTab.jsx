@@ -24,7 +24,7 @@ const CreateTab = () => {
             });
 
         }
-        else if(values.NameOfCategory === "Unsorted Tasks" || values.NameOfCategory === "UnsortedTasks"){
+        else if(values.NameOfCategory === "Unsorted Tasks" || values.NameOfCategory === "UnsortedTasks" || values.NameOfCategory === "completedtasks" || values.NameOfCategory === "Completed Tasks"){
             messageApi.warning('This category cannot be created')
         }
         else if(!isDuplicate) {

@@ -3,13 +3,14 @@ import { Modal} from "antd";
 import FormComponent from "../../create-task-page/form/FormComponent.jsx";
 
 const EditTaskModal = ({isModalOpen, handleCancel, taskInfo = []}) => {
-    const [taskId, taskTitle, taskDescription, taskDate, categories] = taskInfo;
+    const [taskId, taskTitle, taskDescription, taskDate, categories, isDone] = taskInfo;
     const task = {
         id:taskId,
         title: taskTitle,
         description: taskDescription,
         categories: categories,
         date: taskDate,
+        isDone: isDone,
     }
     return (
         <>

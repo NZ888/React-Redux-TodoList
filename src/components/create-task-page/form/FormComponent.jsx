@@ -22,19 +22,25 @@ const FormComponent = ({existableTaskInfo = null}) => {
     const [isEditMode, setIsEditMode] = useState(() => existableTaskInfo !== null);
     const [form] = Form.useForm();
     const variant = Form.useWatch('variant', form);
-    const categories = useSelector(state => state.category.category);
+    const rawCategories = useSelector(state => state.category.category);
+    const categories = rawCategories.filter((cat)=> cat.value !== "completedtasks")
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
+
+    const TECH_TAG = 'completedtasks';
 
     useEffect(() => {
         setIsEditMode(existableTaskInfo !== null);
         if (existableTaskInfo) {
             const { title, description, categories, date } = existableTaskInfo;
+            const userCats = (categories || []).filter(cat =>
+                (typeof cat === "string" ? cat : cat.value) !== TECH_TAG
+            );
             form.setFieldsValue({
                 title,
                 description,
-                category: categories,
+                category: userCats,
                 date: date ? [dayjs(date[0]), dayjs(date[1])] : undefined,
             });
         } else {
@@ -58,12 +64,20 @@ const FormComponent = ({existableTaskInfo = null}) => {
             ? values.date.map(d => d.format('YYYY-MM-DD HH:mm'))
             : null;
 
+        const catsToSave = [...values.category];
+
+        if (isEditMode && existableTaskInfo.isDone) {
+            if (!catsToSave.includes(TECH_TAG)) {
+                catsToSave.push(TECH_TAG);
+            }
+        }
         const task = {
             id: isEditMode ? existableTaskInfo.id : Date.now(),
             title: values.title,
             description: values.description,
-            categories: [...values.category],
+            categories: catsToSave,
             date: dateRange,
+            isDone: isEditMode ? existableTaskInfo.isDone : false,
         }
 
         if (isEditMode) {

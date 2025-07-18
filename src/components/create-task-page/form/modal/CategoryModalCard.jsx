@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 const CategoryModalCard = ({title, value, messageApi}) => {
     const dispatch = useDispatch();
     const closeFunc = e => {
-        if (value === 'UnsortedTasks') {
+        if (value === 'UnsortedTasks' || value === "completedtasks") {
             e.preventDefault();
             messageApi.warning('This category cannot be deleted');
             return;

@@ -28,6 +28,7 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
                             description={t.description}
                             categories={t.categories}
                             messageAPI={messageApi}
+                            isDone={t.isDone}
                         />
                     ))
                 ) : (

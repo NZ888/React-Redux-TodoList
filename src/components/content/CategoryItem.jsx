@@ -1,9 +1,10 @@
 import React, {useState, useCallback} from 'react';
-import {Button, Divider} from "antd";
+import {Button, Divider, Tooltip} from "antd";
 import {useDispatch} from "react-redux";
-import {deleteTask} from "../../Redux/slices/tasksSlice.js";
+import {deleteTask, doneTask} from "../../Redux/slices/tasksSlice.js";
 import EditTaskModal from "./modal/EditTaskModal.jsx";
-const CategoryItem = ({id, title, description, date = null, categories, messageAPI}) => {
+import { CheckOutlined } from "@ant-design/icons";
+const CategoryItem = ({id, title, description, date = null, categories, messageAPI, isDone}) => {
 
     const dispatch = useDispatch();
 
@@ -27,13 +28,22 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
         setIsModalOpen(false);
     }, []);
 
+    const handleDone = () =>{
+        dispatch(doneTask(id))
+    }
     return (
         <>
-            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories]}/>
+            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories, isDone]}/>
             <div data-id-task={id}>
-                <h2>Title: {title}</h2>
+                <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", color: isDone ? "green" : "black", gap:"1rem"}}>
+                    <h2>Title: {title}</h2>
+                    <Tooltip title="Done?">
+                        <Button shape="circle" icon={isDone ? <CheckOutlined /> : null}  onClick={handleDone} />
+                    </Tooltip>
+                </div>
                 <p>Description: {description}</p>
                 <p>{date !== null ? `${date[0]} - ${date[1]}`: null}</p>
+
                 <Button type="primary" onClick={onClickEdit}>Edit</Button>
                 <Button style={{marginLeft: "8px"}} onClick={()=>{onClickDelete(id)}}>Delete</Button>
                 <Divider />

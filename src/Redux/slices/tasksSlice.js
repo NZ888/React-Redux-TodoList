@@ -24,6 +24,22 @@ export const createTaskSlice = createSlice({
             task.description = description
             task.categories = categories
             task.date = date
+        },
+        doneTask: (state, action) => {
+            const task = state.tasks.find(task => task.id === action.payload)
+            if (!task) return;
+
+            const TAG = "completedtasks";
+            task.isDone = !task.isDone;
+
+            if (task.isDone) {
+                if (!task.categories.includes(TAG)) {
+                    task.categories.push(TAG);
+                }
+            }
+            else {
+                task.categories = task.categories.filter(cat => cat !== TAG);
+            }
         }
     },
     extraReducers: (builder) => {
@@ -38,5 +54,5 @@ export const createTaskSlice = createSlice({
     }
 })
 
-export const {addTask, deleteTask, editTask} = createTaskSlice.actions;
+export const {addTask, deleteTask, editTask, doneTask} = createTaskSlice.actions;
 export default createTaskSlice.reducer;
