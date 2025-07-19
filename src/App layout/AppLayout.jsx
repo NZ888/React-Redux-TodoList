@@ -27,11 +27,10 @@ const AppLayout = () => (
             <Content style={{ minHeight: 'calc(100vh - 64px)' }}>
                 <Suspense fallback={<FullPageSpinner />}>
                     <Routes>
-                        {/*<Route path="/"        element={<HomePage />} />*/}
                         <Route path="/create-task"  element={<CreateTaskPage />} />
                         <Route path="/tasks"   element={<TasksPage />} />
                         <Route path="/"   element={<AboutPage />} />
-                        <Route path="*"        element={<h1>Страница не найдена</h1>} />
+                        <Route path="*"        element={<h1>Page not found</h1>} />
                     </Routes>
                 </Suspense>
             </Content>
