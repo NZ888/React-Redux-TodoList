@@ -1,11 +1,14 @@
 import React from 'react';
 import {Card, message} from "antd";
 import CategoryItem from "./CategoryItem.jsx";
+import {useDrop} from "react-dnd";
+import {useDispatch} from "react-redux";
+import {moveTask} from "../../Redux/slices/tasksSlice.js";
 
 const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
 
     const [messageApi, contextHolder] = message.useMessage();
-
+    const dispatch = useDispatch();
     const cardStyle = {
         width: "auto",
         margin: 8,
@@ -14,10 +17,14 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
         ...(todos.length === 0 && { minHeight: 200 }),
         alignSelf: "flex-start",
     };
+    const [, drop] = useDrop(() => ({
+        accept: 'TASK',
+        drop: ({ id }) => dispatch(moveTask({ id, targetCategory: categoryValue })),
+    }));
     return (
         <>
             {contextHolder}
-            <Card title={category} variant="borderless" style={cardStyle} data-value={categoryValue}>
+            <Card title={category} variant="borderless" style={cardStyle} data-value={categoryValue} ref={drop}>
                 {Array.isArray(todos) && todos.length > 0 ? (
                     todos.map((t) => (
                         <CategoryItem

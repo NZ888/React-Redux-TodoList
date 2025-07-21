@@ -40,8 +40,20 @@ export const createTaskSlice = createSlice({
             else {
                 task.categories = task.categories.filter(cat => cat !== TAG);
             }
+        },
+        moveTask: (state, action) => {
+            const { id, targetCategory } = action.payload;
+            const task = state.tasks.find(t => t.id === id);
+            if (!task) return;
+            if (targetCategory.includes("completedtasks")) {
+                task.isDone = true
+            }
+            const tech = task.categories.filter(c => c === 'completedtasks');
+            task.categories = [...tech, targetCategory];
         }
+
     },
+
     extraReducers: (builder) => {
         builder.addCase(deleteCategory, (state, action) => {
             state.tasks.forEach(task => {
@@ -54,5 +66,5 @@ export const createTaskSlice = createSlice({
     }
 })
 
-export const {addTask, deleteTask, editTask, doneTask} = createTaskSlice.actions;
+export const {addTask, deleteTask, editTask, doneTask, moveTask} = createTaskSlice.actions;
 export default createTaskSlice.reducer;

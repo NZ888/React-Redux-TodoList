@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import {deleteTask, doneTask} from "../../Redux/slices/tasksSlice.js";
 import EditTaskModal from "./modal/EditTaskModal.jsx";
 import { CheckOutlined } from "@ant-design/icons";
+import {useDrag} from "react-dnd";
 const CategoryItem = ({id, title, description, date = null, categories, messageAPI, isDone}) => {
 
     const dispatch = useDispatch();
@@ -31,10 +32,15 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
     const handleDone = () =>{
         dispatch(doneTask(id))
     }
+    const [{ isDragging }, drag] = useDrag(() => ({
+        type: 'TASK',
+        item: { id },
+        collect: monitor => ({ isDragging: monitor.isDragging() }),
+    }));
     return (
         <>
             <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories, isDone]}/>
-            <div data-id-task={id}>
+            <div data-id-task={id} ref={drag} style={{ opacity: isDragging ? 0.5 : 1, padding: "10px", borderRadius: "20px" }}>
                 <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", color: isDone ? "green" : "black", gap:"1rem"}}>
                     <h2>Title: {title}</h2>
                     <Tooltip title="Done?">
