@@ -2,6 +2,7 @@ import { Menu, ConfigProvider } from 'antd';
 import { AppstoreOutlined, ContactsOutlined, EditOutlined } from '@ant-design/icons';
 import { NavLink, useLocation } from 'react-router-dom';
 import "./menu.css"
+import SearchModalComponent from "./search-modal/SearchModalComponent.jsx";
 const rawItems = [
     {
         key: 'create',
@@ -70,6 +71,9 @@ export default function MenuComponent() {
                     }}
                 />
             </nav>
+            {pathname.includes('tasks') && (
+                <SearchModalComponent/>
+            )}
         </ConfigProvider>
     );
 }

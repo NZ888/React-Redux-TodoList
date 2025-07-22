@@ -14,7 +14,9 @@ const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     width: '100%',
-    paddingLeft: "10px"
+    paddingLeft: "10px",
+    alignItems: 'center',
+    gap: 20
 };
 const githubLogoStyle = {
     fontSize: 30,
