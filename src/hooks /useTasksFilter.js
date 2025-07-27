@@ -24,6 +24,8 @@ export const useTasksFilter = (tasks, field, query) => {
                     return task.description?.toLowerCase().includes(q);
                 case 'title':
                     return task.title.toLowerCase().includes(q);
+                case 'isDone':
+                    return  task.isDone === (q === 'true');
                 default:
                     return (
                         task.title.toLowerCase().includes(q) ||

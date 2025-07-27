@@ -25,6 +25,7 @@ const SearchModalComponent = () => {
                 open={isModalOpen}
                 onOk={handleOk}
                 onCancel={handleCancel}
+                footer={null}
             >
                 <SearchFieldsComponent/>
             </Modal>
