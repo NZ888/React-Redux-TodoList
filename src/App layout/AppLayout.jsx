@@ -3,6 +3,7 @@ import { Layout } from 'antd';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainHeader from '../components/header/MainHeader.jsx';
 import FullPageSpinner from "../components/spiner/FullPageSpinner.jsx";
+import TaskPage from "../pages/TaskPage.jsx";
 const CreateTaskPage = lazy(() => import('../pages/createTaskPage.jsx'));
 const TasksPage = lazy(() => import("../pages/TasksPage.jsx"));
 const AboutPage = lazy(() => import('../pages/AboutPage.jsx'));
@@ -30,6 +31,7 @@ const AppLayout = () => (
                         <Route path="/create-task"  element={<CreateTaskPage />} />
                         <Route path="/tasks"   element={<TasksPage />} />
                         <Route path="/"   element={<AboutPage />} />
+                        <Route path="task/:id" element={<TaskPage />} />
                         <Route path="*"        element={<h1>Page not found</h1>} />
                     </Routes>
                 </Suspense>

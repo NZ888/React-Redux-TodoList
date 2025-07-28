@@ -5,10 +5,12 @@ import {deleteTask, doneTask} from "../../Redux/slices/tasksSlice.js";
 import EditTaskModal from "./modal/EditTaskModal.jsx";
 import { CheckOutlined } from "@ant-design/icons";
 import {useDrag} from "react-dnd";
+import "./categoryItem.css"
+import {useNavigate} from "react-router";
 const CategoryItem = ({id, title, description, date = null, categories, messageAPI, isDone}) => {
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onClickDelete = useCallback(() => {
@@ -37,12 +39,17 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
         item: { id },
         collect: monitor => ({ isDragging: monitor.isDragging() }),
     }));
+
+    const openTaskPage = () => {
+        navigate(`/task/${id}`);
+    };
+
     return (
         <>
             <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories, isDone]}/>
             <div data-id-task={id} ref={drag} style={{ opacity: isDragging ? 0.5 : 1, padding: "10px", borderRadius: "20px" }}>
                 <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", color: isDone ? "green" : "black", gap:"1rem"}}>
-                    <h2>Title: {title}</h2>
+                    <h2 onClick={openTaskPage} className={"title"}>Title: {title}</h2>
                     <Tooltip title="Done?">
                         <Button shape="circle" icon={isDone ? <CheckOutlined /> : null}  onClick={handleDone} />
                     </Tooltip>
