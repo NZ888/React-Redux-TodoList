@@ -3,10 +3,10 @@ import { Layout } from 'antd';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainHeader from '../components/header/MainHeader.jsx';
 import FullPageSpinner from "../components/spiner/FullPageSpinner.jsx";
-import TaskPage from "../pages/TaskPage.jsx";
 const CreateTaskPage = lazy(() => import('../pages/createTaskPage.jsx'));
 const TasksPage = lazy(() => import("../pages/TasksPage.jsx"));
 const AboutPage = lazy(() => import('../pages/AboutPage.jsx'));
+const TaskPage = lazy(() => import('../pages/TaskPage.jsx'));
 const { Header, Content } = Layout;
 
 const layoutStyle = {
