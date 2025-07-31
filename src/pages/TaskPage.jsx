@@ -8,6 +8,7 @@ const TaskPage = () => {
     const task = tasks.filter((task) => task.id === parseInt(params.id))[0];
     return (
         <>
+
             <TaskPageComponent task={task} />
         </>
     );
