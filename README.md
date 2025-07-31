@@ -10,6 +10,7 @@ A lightweight task manager built with **React**, **Redux Toolkit** and **Vite**.
 - **Drag and drop** – move tasks between categories by dragging.
 - **Search** – filter tasks by title or description in a modal dialog.
 - **Masonry layout** – responsive grid of categories powered by `react-masonry-css`.
+- **Persistent storage** – tasks and categories are stored locally via `redux-persist`.
 - **Lazy loaded pages** – routes are loaded on demand with a full page spinner during loading.
 
 ## Getting started
