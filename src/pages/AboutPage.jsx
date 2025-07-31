@@ -7,10 +7,10 @@ const AboutPage = () => {
             <div className={styles.text}>
                 <h1>About the project</h1>
                 <p>
-                    TodoList is a simple and easy-to-use task manager based on React and Redux.
-                    With its help you can quickly schedule tasks, categorize them, set deadlines and edit already created records.
-                    . The interface is as lightweight as possible
-                    and doesn't distract from the most important thing - your tasks.
+                    TodoList is a lightweight task manager built with React and Redux Toolkit.
+                    Quickly create tasks, group them into categories and edit or mark them as done.
+                    Drag and drop support lets you reorganize tasks with ease while the interface stays minimalistic.
+                    All data is stored locally so your list persists between sessions.
                 </p>
                 <p>
                     Add categories, manage your to-do list and stay productive every day!
