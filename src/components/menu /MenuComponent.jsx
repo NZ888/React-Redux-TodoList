@@ -3,6 +3,7 @@ import { AppstoreOutlined, ContactsOutlined, EditOutlined } from '@ant-design/ic
 import { NavLink, useLocation } from 'react-router-dom';
 import "./menu.css"
 import SearchModalComponent from "./search-modal/SearchModalComponent.jsx";
+import ThemeDropdownComponent from "./theme-dropdown/ThemeDropdownComponent.jsx";
 const rawItems = [
     {
         key: 'create',
@@ -68,9 +69,11 @@ export default function MenuComponent() {
                         minWidth: 0,
                         lineHeight: '64px',
                         background: '#4096ff',
+                        // background: rgba(255, 255, 255, 0.12);
                     }}
                 />
             </nav>
+            <ThemeDropdownComponent />
             {pathname.includes('tasks') && (
                 <SearchModalComponent/>
             )}

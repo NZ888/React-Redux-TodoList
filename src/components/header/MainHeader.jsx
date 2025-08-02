@@ -4,7 +4,7 @@ import MenuComponent from "../menu /MenuComponent.jsx";
 import {GithubOutlined} from "@ant-design/icons";
 const { Header} = Layout;
 
-const headerStyle = {
+const baseHeaderStyle = {
     textAlign: 'center',
     color: '#fff',
     height: 64,
@@ -18,6 +18,7 @@ const headerStyle = {
     alignItems: 'center',
     gap: 20
 };
+
 const githubLogoStyle = {
     fontSize: 30,
     color: '#fff',
@@ -28,7 +29,7 @@ const MainHeader = () => {
     };
     return (
         <>
-            <Header style={headerStyle}>
+            <Header style={baseHeaderStyle}>
                 <MenuComponent/>
                 <GithubOutlined style={githubLogoStyle} onClick={openGithubProfile}/>
             </Header>
