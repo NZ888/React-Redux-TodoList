@@ -27,7 +27,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
     const dispatch = useDispatch();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
-
+    const theme = useSelector(state => state.theme.theme);
     const TECH_TAG = 'completedtasks';
 
     useEffect(() => {
@@ -93,7 +93,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
         });
     };
     return (
-        <>
+        <div style={{color: theme === "modernTheme" ? "white" : "black"}}>
             {contextHolder}
             <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
             <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
@@ -151,7 +151,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
                     </Space>
                 </Form.Item>
             </Form>
-        </>
+        </div>
 
     );
 };

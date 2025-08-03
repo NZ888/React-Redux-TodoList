@@ -189,7 +189,20 @@ export default function LavaLampBackground() {
         };
     }, []);
 
-    return <canvas ref={canvasRef} className="lava-canvas" />;
+    return (
+        <canvas
+            ref={canvasRef}
+            style={{
+                position: 'fixed',
+                inset: 0,
+                width: '100vw',
+                height: '100vh',
+                zIndex: -1,
+                pointerEvents: 'none',
+            }}
+        />
+    );
+
 }
 
 //The code was taken from https://codepen.io/haljasala/pen/pvzbpXd and edited by me for React.

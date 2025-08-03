@@ -21,7 +21,9 @@ const ThemeDropdownComponent = () => {
     const dispatch = useDispatch();
 
     const onClick = ({ key }) => {
+        window.location.reload()
         dispatch(changeTheme(key));
+
     };
 
     return (

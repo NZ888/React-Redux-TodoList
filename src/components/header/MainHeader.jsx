@@ -2,6 +2,8 @@ import React from 'react';
 import {Layout} from "antd";
 import MenuComponent from "../menu /MenuComponent.jsx";
 import {GithubOutlined} from "@ant-design/icons";
+import {useSelector} from "react-redux";
+
 const { Header} = Layout;
 
 const baseHeaderStyle = {
@@ -19,6 +21,11 @@ const baseHeaderStyle = {
     gap: 20
 };
 
+const modernHeaderStyle = {
+    ...baseHeaderStyle,
+    background: "rgba(255, 255, 255, 0.12)",
+}
+
 const githubLogoStyle = {
     fontSize: 30,
     color: '#fff',
@@ -27,10 +34,12 @@ const MainHeader = () => {
     const openGithubProfile = () => {
         window.open('https://github.com/NZ888', '_blank');
     };
+    const theme = useSelector((state) => state.theme.theme);
+    console.log(theme);
     return (
         <>
-            <Header style={baseHeaderStyle}>
-                <MenuComponent/>
+            <Header style={theme === "modernTheme" ? modernHeaderStyle : baseHeaderStyle}>
+                <MenuComponent theme={theme} />
                 <GithubOutlined style={githubLogoStyle} onClick={openGithubProfile}/>
             </Header>
         </>

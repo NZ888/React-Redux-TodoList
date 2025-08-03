@@ -43,7 +43,17 @@ const menuItems = rawItems.map((it) => ({
     ),
 }));
 
-export default function MenuComponent() {
+const baseMenuStyes = {
+    flex: 1,
+    minWidth: 0,
+    lineHeight: '64px',
+    background: '#4096ff',
+}
+const modernMenuStyles = {
+    ...baseMenuStyes,
+    background: "rgba(255, 255, 255, 0.12)",
+}
+export default function MenuComponent({theme}) {
     const { pathname } = useLocation();
     const selectedKey = rawItems.find(i => pathname.startsWith(i.path))?.key;
 
@@ -64,13 +74,7 @@ export default function MenuComponent() {
                     mode="horizontal"
                     items={menuItems}
                     selectedKeys={[selectedKey]}
-                    style={{
-                        flex: 1,
-                        minWidth: 0,
-                        lineHeight: '64px',
-                        background: '#4096ff',
-                        // background: rgba(255, 255, 255, 0.12);
-                    }}
+                    style={theme === "modernTheme" ? modernMenuStyles : baseMenuStyes}
                 />
             </nav>
             <ThemeDropdownComponent />
