@@ -1,0 +1,28 @@
+.container {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: white;
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 800px;
+    line-height: 1.6;
+    font-size: 18px;
+    text-align: center;
+    color: white;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px rgb(67, 64, 64);
+    word-break: break-word;
+    border-radius: 15px;
+
+}

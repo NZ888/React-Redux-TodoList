@@ -1,10 +1,11 @@
 import React from 'react';
-import styles from './aboutPage.module.css';
+import baseStyles from './aboutPage.module.css';
+import modernStyles from "./aboutModernPage.module.css"
+const AboutPage = ({theme}) => {
 
-const AboutPage = () => {
     return (
-        <div className={styles.container}>
-            <div className={styles.text}>
+        <div className={theme === "modernTheme" ? modernStyles.container : baseStyles.container}>
+            <div className={theme === "modernTheme" ? modernStyles.text : baseStyles.text}>
                 <h1>About the project</h1>
                 <p>
                     TodoList is a lightweight task manager built with React and Redux Toolkit.

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Form} from "antd";
+import formModernStyles from "./formModernStyles.module.css";
 
 const SubmitButton = ({form, children, ...props}) => {
     const [submittable, setSubmittable] = React.useState(false);

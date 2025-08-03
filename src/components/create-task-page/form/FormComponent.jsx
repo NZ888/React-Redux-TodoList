@@ -6,7 +6,7 @@ import {addTask, editTask} from "../../../Redux/slices/tasksSlice.js";
 import CategoriesModal from "./modal/CategoriesModal.jsx";
 const { RangePicker } = DatePicker;
 import dayjs from 'dayjs';
-
+import formModernStyles from "./formModernStyles.module.css";
 const formItemLayout = {
     labelCol: {
         xs: { span: 24 },
@@ -93,64 +93,96 @@ const FormComponent = ({existableTaskInfo = null}) => {
         });
     };
     return (
-        <div style={{color: theme === "modernTheme" ? "white" : "black"}}>
+        <div style={{color: theme === "modernTheme" && isEditMode === false ? "white" : "black"}}>
             {contextHolder}
             <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
-            <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
-            <Form {...formItemLayout} form={form} variant={variant || 'outlined'} initialValues={{ variant: 'outlined' }} onFinish={handleSubmit}>
+            <div className={theme === "modernTheme" && isEditMode === false ? formModernStyles.container : null}>
+                <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
+                <Form {...formItemLayout} form={form} variant={variant || 'outlined'} initialValues={{ variant: 'outlined' }} onFinish={handleSubmit}>
 
-                <Form.Item label="Title" name="title" rules={[{ required: true, message: 'Please input!' }]}>
-                    <Input />
-                </Form.Item>
+                    <Form.Item
+                        label={
+                            <span style={{ color: theme === "modernTheme" && !isEditMode ? "rgba(255,255,255,0.88)" : undefined }}>
+                                Title
+                            </span>
+                        }
+                        name="title"
+                        rules={[{ required: true, message: 'Please input!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
 
-                <Form.Item
-                    label="Description"
-                    name="description"
-                    rules={[{ required: true, message: 'Please input!'}]}
+                    <Form.Item
+                        label={
+                            <span style={{ color: theme === "modernTheme" && !isEditMode ? "rgba(255,255,255,0.88)" : undefined }}>
+                                Description
+                            </span>
+                        }
+                        name="description"
+                        rules={[{ required: true, message: 'Please input!'}]}
 
-                >
-                    <Input.TextArea style={{ height: '200px', resize: 'none' }} />
-                </Form.Item>
+                    >
+                        <Input.TextArea style={{ height: '200px', resize: 'none' }} />
+                    </Form.Item>
 
-                <Form.Item label="Category" required>
-                    <Row gutter={8} wrap={false}>
-                        <Col flex="70%">
-                            <Form.Item
-                                name="category"
-                                noStyle
-                                rules={[{ required: true, message: 'Please choose!' }]}
-                            >
-                                <Select
-                                    mode="multiple"
-                                    options={categories}
-                                    style={{ width: '100%' }}
-                                />
-                            </Form.Item>
-                        </Col>
+                    <Form.Item
+                        label={
+                            <span style={{ color: theme === "modernTheme" && !isEditMode ? "rgba(255,255,255,0.88)" : undefined }}>
+                                Category
+                            </span>
+                        }
+                        required
+                    >
+                        <Row gutter={8} wrap={false}>
+                            <Col flex="70%">
+                                <Form.Item
+                                    name="category"
+                                    noStyle
+                                    rules={[{ required: true, message: 'Please choose!' }]}
+                                >
+                                    <Select
+                                        mode="multiple"
+                                        options={categories}
+                                        style={{ width: '100%' }}
+                                    />
+                                </Form.Item>
+                            </Col>
 
-                        <Col flex="30%">
-                            <Button onClick={showModal}>Edit categories</Button>
-                        </Col>
-                    </Row>
-                </Form.Item>
+                            <Col flex="30%">
+                                <Button style={{backgroundColor:"inherit", color: theme === "modernTheme" ? "white" : null}} onClick={showModal} className={theme === "modernTheme" ? formModernStyles.btn : null}>Edit categories</Button>
+                            </Col>
+                        </Row>
+                    </Form.Item>
 
-                <Form.Item
-                    label="Date"
-                    name="date"
-                    rules={[{ required: false, message: 'Please input!' }]}
-                >
-                    <RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm"/>
-                </Form.Item>
+                    <Form.Item
+                        label={
+                            <span style={{ color: theme === "modernTheme" && !isEditMode ? "rgba(255,255,255,0.88)" : undefined }}>
+                                Date
+                            </span>
+                        }
+                        name="date"
+                        rules={[{ required: false, message: 'Please input!' }]}
+                    >
+                        <RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm"/>
+                    </Form.Item>
 
-                <Form.Item name="submit" label="The end of the form">
-                    <Space>
-                        <SubmitButton form={form}>
-                            {isEditMode ? 'Save' : 'Submit'}
-                        </SubmitButton>
-                        <Button htmlType="reset">Reset</Button>
-                    </Space>
-                </Form.Item>
-            </Form>
+                    <Form.Item
+                        name="submit"
+                        label={
+                            <span style={{ color: theme === "modernTheme" && !isEditMode ? "rgba(255,255,255,0.88)" : undefined }}>
+                                The end of the form
+                            </span>
+                        }
+                    >
+                        <Space>
+                            <SubmitButton form={form} className={theme === "modernTheme" ? formModernStyles.btn : null}>
+                                {isEditMode ? 'Save' : 'Submit'}
+                            </SubmitButton>
+                            <Button htmlType="reset" style={{marginLeft: "8px", color:"red"}} className={theme === "modernTheme" ? formModernStyles.btn : null} >Reset</Button>
+                        </Space>
+                    </Form.Item>
+                </Form>
+            </div>
         </div>
 
     );

@@ -51,7 +51,7 @@ const baseMenuStyes = {
 }
 const modernMenuStyles = {
     ...baseMenuStyes,
-    background: "rgba(255, 255, 255, 0.12)",
+    background: "inherit",
 }
 export default function MenuComponent({theme}) {
     const { pathname } = useLocation();

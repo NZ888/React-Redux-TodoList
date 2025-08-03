@@ -18,7 +18,9 @@ const baseHeaderStyle = {
     width: '100%',
     paddingLeft: "10px",
     alignItems: 'center',
-    gap: 20
+    gap: 20,
+    zIndex: 5,
+    position: 'relative'
 };
 
 const modernHeaderStyle = {
@@ -35,7 +37,6 @@ const MainHeader = () => {
         window.open('https://github.com/NZ888', '_blank');
     };
     const theme = useSelector((state) => state.theme.theme);
-    console.log(theme);
     return (
         <>
             <Header style={theme === "modernTheme" ? modernHeaderStyle : baseHeaderStyle}>

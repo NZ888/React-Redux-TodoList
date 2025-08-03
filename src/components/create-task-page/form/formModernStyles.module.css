@@ -1,0 +1,20 @@
+.container {
+    margin-top: 10%;
+    color: white;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    word-break: break-word;
+    border-radius: 15px;
+}
+
+.btn{
+    color: white;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(15px) saturate(160%);
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}

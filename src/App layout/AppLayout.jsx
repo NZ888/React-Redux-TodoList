@@ -9,7 +9,7 @@ const CreateTaskPage = lazy(() => import('../pages/createTaskPage.jsx'));
 const TasksPage = lazy(() => import("../pages/TasksPage.jsx"));
 const AboutPage = lazy(() => import('../pages/AboutPage.jsx'));
 const TaskPage = lazy(() => import('../pages/TaskPage.jsx'));
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 const layoutStyle = {
     position: 'relative',
@@ -30,9 +30,7 @@ export default function AppLayout() {
 
             <Layout style={layoutStyle}>
                 {theme === 'modernTheme' && <LavaLampBackground />}
-                <Header style={{ padding: 0, zIndex: 5 }}>
-                    <MainHeader />
-                </Header>
+                <MainHeader />
 
                 <Content style={{ minHeight: 'calc(100vh - 64px)' }}>
 
@@ -40,7 +38,7 @@ export default function AppLayout() {
                         <Routes>
                             <Route path="/create-task" element={<CreateTaskPage />} />
                             <Route path="/tasks"       element={<TasksPage />} />
-                            <Route path="/"            element={<AboutPage />} />
+                            <Route path="/"            element={<AboutPage theme={theme} />} />
                             <Route path="task/:id"     element={<TaskPage />} />
                             <Route path="*"            element={<h1>Page not found</h1>} />
                         </Routes>
