@@ -1,7 +1,4 @@
-.title:hover{
-    cursor: pointer;
-}
-.catItemBtn{
+.createTabBtn{
     color: white;
     background: rgba(255, 255, 255, 0.12);
     backdrop-filter: blur(15px) saturate(160%);

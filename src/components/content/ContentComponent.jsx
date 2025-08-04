@@ -28,7 +28,7 @@ const ContentComponent = () => {
                     background: theme === 'modernTheme' ? 'transparent' : '#0958d9',
                 }}
             >
-                <LayoutGrid />
+                <LayoutGrid theme={theme}/>
                 <Outlet />
             </Content>
         </Layout>

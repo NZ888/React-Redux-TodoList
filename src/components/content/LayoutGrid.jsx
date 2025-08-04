@@ -3,7 +3,7 @@ import ContentCategoryComponent from "./ContentCategoryComponent.jsx";
 import {useSelector} from "react-redux";
 import Masonry from 'react-masonry-css'
 import "./layoutGrid.css"
-const LayoutGrid = () => {
+const LayoutGrid = ({theme}) => {
     const categories = useSelector((state) => state.category.category);
     const tasks = useSelector((state) => state.tasks.tasks);
 
@@ -43,6 +43,7 @@ const LayoutGrid = () => {
                         category={c.label}
                         todos={c.tasks}
                         categoryValue={c.value}
+                        theme={theme}
                     />
                 ))}
             </Masonry>

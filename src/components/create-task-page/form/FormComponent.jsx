@@ -95,7 +95,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
     return (
         <div style={{color: theme === "modernTheme" && isEditMode === false ? "white" : "black"}}>
             {contextHolder}
-            <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel}/>
+            <CategoriesModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} theme={theme}/>
             <div className={theme === "modernTheme" && isEditMode === false ? formModernStyles.container : null}>
                 <h1>{isEditMode ? 'Edit task' : 'Let’s make the task!'}</h1>
                 <Form {...formItemLayout} form={form} variant={variant || 'outlined'} initialValues={{ variant: 'outlined' }} onFinish={handleSubmit}>
@@ -144,6 +144,7 @@ const FormComponent = ({existableTaskInfo = null}) => {
                                         mode="multiple"
                                         options={categories}
                                         style={{ width: '100%' }}
+                                        dropdownStyle={{ background: theme === "modernTheme" ? 'rgba(255,255,255,0.56)' : null }}
                                     />
                                 </Form.Item>
                             </Col>
@@ -163,7 +164,10 @@ const FormComponent = ({existableTaskInfo = null}) => {
                         name="date"
                         rules={[{ required: false, message: 'Please input!' }]}
                     >
-                        <RangePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm"/>
+                        <RangePicker
+                            showTime={{ format: 'HH:mm' }}
+                            format="YYYY-MM-DD HH:mm"
+                        />
                     </Form.Item>
 
                     <Form.Item

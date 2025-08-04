@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {Input, message, Select} from "antd";
 import {useSelector} from "react-redux";
 import {useTasksFilter} from "../../../hooks /useTasksFilter.js";
 import CategoryItem from "../../content/CategoryItem.jsx";
-const SearchFieldsComponent = () => {
+const SearchFieldsComponent = ({theme}) => {
 
     const tasks = useSelector(state => state.tasks.tasks);
     const [filter, setFilter] = React.useState({sort:"", query:""});
@@ -53,6 +53,7 @@ const SearchFieldsComponent = () => {
                             categories={t.categories}
                             messageAPI={messageApi}
                             isDone={t.isDone}
+                            theme={theme}
                         />
                     ))
                 ) : (

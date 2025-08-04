@@ -5,7 +5,7 @@ import {useDrop} from "react-dnd";
 import {useDispatch} from "react-redux";
 import {moveTask} from "../../Redux/slices/tasksSlice.js";
 
-const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
+const ContentCategoryComponent = ({category, todos = [], categoryValue, theme}) => {
 
     const [messageApi, contextHolder] = message.useMessage();
     const dispatch = useDispatch();
@@ -17,6 +17,10 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
         ...(todos.length === 0 && { minHeight: 200 }),
         alignSelf: "flex-start",
     };
+    const modenrCardStyle = {
+        ...cardStyle,
+        background: "rgba(255,255,255,0.53)"
+    }
     const [, drop] = useDrop(() => ({
         accept: 'TASK',
         drop: ({ id }) => dispatch(moveTask({ id, targetCategory: categoryValue })),
@@ -24,7 +28,7 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
     return (
         <>
             {contextHolder}
-            <Card title={category} variant="borderless" style={cardStyle} data-value={categoryValue} ref={drop}>
+            <Card title={category} variant="borderless" style={theme === "modernTheme" ? modenrCardStyle : cardStyle} data-value={categoryValue} ref={drop}>
                 {Array.isArray(todos) && todos.length > 0 ? (
                     todos.map((t) => (
                         <CategoryItem
@@ -36,6 +40,7 @@ const ContentCategoryComponent = ({category, todos = [], categoryValue}) => {
                             categories={t.categories}
                             messageAPI={messageApi}
                             isDone={t.isDone}
+                            theme={theme}
                         />
                     ))
                 ) : (

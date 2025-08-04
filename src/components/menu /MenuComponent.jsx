@@ -79,7 +79,7 @@ export default function MenuComponent({theme}) {
             </nav>
             <ThemeDropdownComponent />
             {pathname.includes('tasks') && (
-                <SearchModalComponent/>
+                <SearchModalComponent theme={theme}/>
             )}
         </ConfigProvider>
     );

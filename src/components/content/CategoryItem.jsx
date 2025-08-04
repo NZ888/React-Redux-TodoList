@@ -7,7 +7,7 @@ import { CheckOutlined } from "@ant-design/icons";
 import {useDrag} from "react-dnd";
 import "./categoryItem.css"
 import {useNavigate} from "react-router";
-const CategoryItem = ({id, title, description, date = null, categories, messageAPI, isDone}) => {
+const CategoryItem = ({id, title, description, date = null, categories, messageAPI, isDone, theme}) => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
 
     return (
         <>
-            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories, isDone]}/>
+            <EditTaskModal isModalOpen={isModalOpen} handleOk={handleOk} handleCancel={handleCancel} taskInfo={[id, title, description, date, categories, isDone]} theme={theme}/>
             <div data-id-task={id} ref={drag} style={{ opacity: isDragging ? 0.5 : 1, padding: "10px", borderRadius: "20px" }}>
                 <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", color: isDone ? "green" : "black", gap:"1rem"}}>
                     <h2 onClick={openTaskPage} className={"title"}>Title: {title}</h2>
@@ -56,9 +56,8 @@ const CategoryItem = ({id, title, description, date = null, categories, messageA
                 </div>
                 <p>Description: {description}</p>
                 <p>{date !== null ? `${date[0]} - ${date[1]}`: null}</p>
-
-                <Button type="primary" onClick={onClickEdit}>Edit</Button>
-                <Button style={{marginLeft: "8px"}} onClick={()=>{onClickDelete(id)}}>Delete</Button>
+                <Button  onClick={onClickEdit} style={{backgroundColor:"inherit", color: theme === "modernTheme" ? "white" : null}} className={theme === "modernTheme" ? "catItemBtn" : null}>Edit</Button>
+                <Button style={{marginLeft: "8px", color:"red"}} className={theme === "modernTheme" ? "catItemBtn": null}  onClick={()=>{onClickDelete(id)}}>Delete</Button>
                 <Divider />
             </div>
         </>

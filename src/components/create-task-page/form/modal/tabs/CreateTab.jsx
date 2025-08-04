@@ -3,8 +3,9 @@ import { Col, Form, Input, message, Row} from "antd";
 import SubmitButton from "../../SubmitButton.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {addCategory} from "../../../../../Redux/slices/categorySlice.js";
+import CreateTabModernStyles from "./modernCreateTab.module.css";
 
-const CreateTab = () => {
+const CreateTab = ({theme}) => {
 
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.category.category);
@@ -68,7 +69,7 @@ const CreateTab = () => {
                     </Col>
                     <Col flex="30%">
                         <Form.Item label={null}  style={{marginLeft: '-20px'}}>
-                            <SubmitButton type="default" htmlType="submit" form={form} >
+                            <SubmitButton type="default" htmlType="submit" form={form} className={theme === "modernTheme" ? CreateTabModernStyles.createTabBtn : null}>
                                 Submit
                             </SubmitButton>
                         </Form.Item>
