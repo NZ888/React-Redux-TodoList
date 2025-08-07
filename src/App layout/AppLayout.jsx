@@ -39,7 +39,7 @@ export default function AppLayout() {
                             <Route path="/create-task" element={<CreateTaskPage />} />
                             <Route path="/tasks"       element={<TasksPage />} />
                             <Route path="/"            element={<AboutPage theme={theme} />} />
-                            <Route path="task/:id"     element={<TaskPage />} />
+                            <Route path="task/:id"     element={<TaskPage theme={theme}/>} />
                             <Route path="*"            element={<h1>Page not found</h1>} />
                         </Routes>
                     </Suspense>
