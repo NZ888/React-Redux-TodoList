@@ -4,17 +4,10 @@ import baseStyles from "../../pages/aboutPage.module.css";
 import axios from "axios";
 import {useQuery} from "@tanstack/react-query";
 import FullPageSpinner from "../spiner/FullPageSpinner.jsx";
-
-const fetchCity = async () => {
-    const response = await axios.get("https://ipwho.is/");
-    return response.data;
-}
+import {useCity} from "../../hooks /useCity.jsx";
 
 const GreetingsPageComponent = ({theme}) => {
-    const {data, isSuccess, isError, isLoading} = useQuery({
-        queryKey: ["city"],
-        queryFn: fetchCity,
-    })
+    const {isSuccess, data, isError, isLoading} = useCity()
     return (
         <div>
             {isSuccess && (
