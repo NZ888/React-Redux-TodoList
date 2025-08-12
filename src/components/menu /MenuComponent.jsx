@@ -21,7 +21,7 @@ const rawItems = [
         key: 'about',
         icon: <ContactsOutlined />,
         label: 'About us',
-        path: '/',
+        path: '/about',
     },
 ];
 
