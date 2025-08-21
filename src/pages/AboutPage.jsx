@@ -1,6 +1,7 @@
 import React from 'react';
 import baseStyles from './aboutPage.module.css';
 import modernStyles from "./aboutModernPage.module.css"
+import {Button} from "antd";
 const AboutPage = ({theme}) => {
 
     return (
@@ -16,6 +17,11 @@ const AboutPage = ({theme}) => {
                 <p>
                     Add categories, manage your to-do list and stay productive every day!
                 </p>
+                <div style={{display:"flex", gap:12, justifyContent:"center"}}>
+                    <Button type="primary" onClick={()=>{window.open('https://github.com/NZ888', '_blank');}} className={modernStyles.Btn}>My Github</Button>
+                    <Button type="primary" onClick={()=>{window.open('https://github.com/NZ888/React-Redux-TodoList', '_blank');}} className={modernStyles.Btn}>Project Repository</Button>
+                    <Button type="primary" onClick={()=>{window.open('https://github.com/NZ888/React-Redux-TodoList/commits/main/', '_blank');}} className={modernStyles.Btn}>Project Commits</Button>
+                </div>
             </div>
         </div>
     );

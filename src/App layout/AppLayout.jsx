@@ -10,6 +10,7 @@ const CreateTaskPage = lazy(() => import('../pages/createTaskPage.jsx'));
 const TasksPage = lazy(() => import("../pages/TasksPage.jsx"));
 const AboutPage = lazy(() => import('../pages/AboutPage.jsx'));
 const TaskPage = lazy(() => import('../pages/TaskPage.jsx'));
+const PageNotFound = lazy(() => import("../pages/PageNotFound.jsx"));
 const { Content } = Layout;
 
 const layoutStyle = {
@@ -42,7 +43,7 @@ export default function AppLayout() {
                             <Route path="/about"            element={<AboutPage theme={theme} />} />
                             <Route path="task/:id"     element={<TaskPage theme={theme}/>} />
                             <Route path="/" element={<GreetingsPage theme={theme} />} />
-                            <Route path="*"            element={<h1>Page not found</h1>} />
+                            <Route path="*"            element={<PageNotFound theme={theme} />} />
                         </Routes>
                     </Suspense>
                 </Content>
